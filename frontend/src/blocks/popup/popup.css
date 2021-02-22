@@ -1,0 +1,28 @@
+@import url("./__container/popup__container.css");
+@import url("./__close/popup__close.css");
+@import url("./__header/popup__header.css");
+@import url("./__input/popup__input.css");
+@import url("./__save/popup__save.css");
+@import url("./__img/popup__img.css");
+@import url("./__img-caption/popup__img-caption.css");
+@import url("./__container-img/popup__container-img.css");
+@import url("./__close-img/popup__close-img.css");
+@import url("./__error/popup__error.css");
+@import url("./__infotooltip/popup__infotooltip.css");
+@import url("./__response/popup__response.css");
+@import url("./__infotooltip-title/popup__infotooltip-title.css");
+
+.popup {
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0.01;
+    transition: all .5s;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}

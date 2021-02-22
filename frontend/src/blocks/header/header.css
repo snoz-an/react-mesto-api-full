@@ -1,0 +1,27 @@
+@import url("./header__logo/header__logo.css");
+@import url("./__in-link/header__in-link.css");
+@import url("./__nav/header__nav.css");
+@import url("./__registration-link/header__registration-link.css");
+@import url("./__data/header__data.css");
+@import url("./__email/header__email.css");
+@import url("./__button-out/header__button-out.css");
+
+
+.header {
+    margin: auto;
+    width: 69.9%;
+    padding-top: 45px;
+    padding-bottom: 40.6px;
+    border: none; 
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 660px) {
+.header {
+    width: 100%;
+    padding-top: 28px;
+    padding-bottom: 31px;
+    }
+}

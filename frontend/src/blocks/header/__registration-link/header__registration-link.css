@@ -1,0 +1,9 @@
+.header__registration-link {
+    color: white;
+    text-decoration: none;
+}
+
+.header__registration-link:hover {
+    opacity: .6;
+    transition: ease-in-out .5s;
+}

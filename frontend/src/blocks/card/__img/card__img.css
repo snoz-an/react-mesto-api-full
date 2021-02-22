@@ -1,0 +1,26 @@
+.card__img {
+    width: 100%;
+    transform: translateY(3px);
+    cursor: pointer;
+    height: 282px;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(45deg, #FF00FF, #FFFF00);
+}
+
+@media screen and (max-width: 1280px) {
+    .card__img {
+      height: 22vw;
+    }
+  }
+
+@media screen and (max-width: 660px) {
+    .card__img {
+      height: 43vw;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .card__img {
+      height: 87vw;
+    }
+  }

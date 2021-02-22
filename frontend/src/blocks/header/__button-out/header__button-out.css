@@ -1,0 +1,14 @@
+.header__button-out {
+    width: 56px;
+    height: 22px;
+    background-color: rgba(0, 50, 50, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.header__button-out:hover {
+    opacity: .6;
+    transition: ease-in-out .5s;
+}

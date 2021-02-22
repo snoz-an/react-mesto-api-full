@@ -1,0 +1,4 @@
+.like_active {
+    background-image: url("../../../images/like_active.svg");
+    transition: ease-in-out .5s;
+}

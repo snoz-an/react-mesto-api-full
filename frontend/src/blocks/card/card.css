@@ -1,0 +1,14 @@
+@import url("./__img/card__img.css");
+@import url("./__name/card__name.css");
+@import url("./__name-container/card__name-container.css");
+@import url("./__delete/card__delete.css");
+ 
+.card {
+    max-width: 282px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}

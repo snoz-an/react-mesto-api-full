@@ -1,0 +1,7 @@
+.popup__infotooltip {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 308px;
+    margin: 0 auto;
+}
