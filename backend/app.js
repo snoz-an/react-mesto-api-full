@@ -24,14 +24,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-/* app.use((req, res, next) => {
-  req.user = {
-    _id: '600da5b715e44b4b942a7c36',
-  };
-  next();
-}); */
-
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
