@@ -18,9 +18,11 @@ function Card(props) {
     } 
 
     const currentUser = React.useContext(CurrentUserContext);
-    const isOwn = cardData.owner._id === currentUser._id;
-    const isLiked = cardData.likes.some(i => i._id === currentUser._id);
-
+    /* const isOwn = cardData.owner_id === currentUser._id;
+    const isLiked = cardData.likes.some((i) => i === currentUser._id); */
+    const isOwn = cardData.owner === currentUser._id;
+    const isLiked = cardData.likes.some(i => i === currentUser._id);
+    
     return(
         <div className="card">
             <img src = {cardData.link} alt={cardData.name} className="card__img" onClick={handleClick} />
@@ -39,5 +41,7 @@ function Card(props) {
         </div>
     ) 
 }
+
+
 
 export default Card

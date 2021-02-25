@@ -55,14 +55,17 @@ export class Api {
         })
     }
   
-    addNewCard(data, userId, token) {
+    addNewCard(data, token) {
       return fetch(`${this._url}/cards`, {
         method: 'POST',
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data, userId),
+        body: JSON.stringify({ 
+          name: data.name,
+          link: data.link
+        }),
       })
         .then(res => {
           return this._parseResult(res)
@@ -77,7 +80,10 @@ export class Api {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          avatar: data.avatar
+        }
+        )
       })
         .then(res => {
           return this._parseResult(res)
@@ -99,9 +105,22 @@ export class Api {
     }
   
   
-    likeCard(id, token) {
-      return fetch(`${this._url}/cards/likes/${id}`, {
-        method: 'PUT',
+     likeCard(cardDataId, isLiked, token) {
+      return fetch(`${this._url}/cards/${cardDataId}/likes`, {
+        method: (isLiked ? "PUT" : "DELETE"),
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then(res => {
+          return this._parseResult(res)
+        })
+    } 
+
+    /* likeCard(id, token) {
+      return fetch(`${this._url}/cards/${id}/likes`, {
+        method:"PUT",
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -112,8 +131,8 @@ export class Api {
         })
     }
   
-    dislikeCard(id, token) {
-      return fetch(`${this._url}/cards/likes/${id}`, {
+      dislikeCard(id, token) {
+      return fetch(`${this._url}/cards/${id}/likes`, {
         method: 'DELETE',
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -123,7 +142,7 @@ export class Api {
         .then(res => {
           return this._parseResult(res)
         })
-    }
+    }*/
   
   }
   

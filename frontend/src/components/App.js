@@ -39,16 +39,18 @@ function App() {
     tokenCheck();
   }, []);
 
-  React.useEffect(() => {
-    if ( loggedIn ){
-      Promise.all([ api.getUserProfile(), api.getInitialCards() ])
+   React.useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if ( token ){
+      const token = localStorage.getItem('jwt');
+      Promise.all([ api.getUserProfile(token), api.getInitialCards(token) ])
         .then( ([res, data]) => {
           setCurrentUser(res)
           setCards(data)
         })
         .catch((err) => console.log(err))
     }
-  }, [loggedIn]);
+  }, [loggedIn]); 
 
   const handleRegister = (data) => {
     const {email, password} = data;
@@ -99,8 +101,8 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setUserData({
-              id: res.data._id,
-              email: res.data.email
+              "id": res._id,
+              "email": res.email
             });
             history.push('/');
           }
@@ -112,10 +114,11 @@ function App() {
     }
   }
 
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+   /* function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     if (!isLiked) { 
-      api.likeCard(card._id)
+      const token = localStorage.getItem('jwt');
+      api.likeCard(!isLiked,card._id, token)
       .then((newCard) => {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         setCards(newCards);
@@ -124,7 +127,8 @@ function App() {
         console.log(err)
         })
       } else {
-          api.dislikeCard(card._id)
+        const token = localStorage.getItem('jwt');
+          api.dislikeCard(card._id, token)
           .then((newCard) => {  
             const newCards = cards.map((c) => c._id === card._id ? newCard : c);
             setCards(newCards);
@@ -133,11 +137,58 @@ function App() {
               console.log(err)
             })
           }  
-  }
+  } */
+
+   function handleCardLike(cardData) {
+    const token = localStorage.getItem('jwt');
+    const isLiked = cardData.likes.some(i => i === currentUser._id);
+    console.log(isLiked.likes)
+    
+    api.likeCard(cardData._id, !isLiked, token)
+      .then((newCard) => {
+       const newCards = cards.map((c) => c._id === cardData._id ? newCard : c);
+       /* const newCards = cards.map((c) =>  {
+          return (c._id !== cardData._id) });*/
+          console.log(newCards)
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  } 
+
+
+  /*function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    if (!isLiked) { 
+      const token = localStorage.getItem('jwt');
+      api.likeCard(card._id, token)
+      .then((newCard) => {
+        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        setCards(newCards);
+      })
+      .catch((err)=>{
+        console.log(err)
+        })
+
+      } else {
+        const token = localStorage.getItem('jwt');
+          api.dislikeCard(card._id, token)
+          .then((newCard) => {  
+            const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+            setCards(newCards);
+          })
+          .catch((err)=>{
+              console.log(err)
+            })
+          }  
+  }*/
+
+
 
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
-    api.deleteCard(card._id, isOwn)
+    const token = localStorage.getItem('jwt');
+    api.deleteCard(card._id, token)
     .then(() => {
     // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
       const newCards = cards.filter((c) =>  {
@@ -151,9 +202,10 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    api.setUserProfile(data)
-    .then((res)=>{
-      setCurrentUser(res)
+    const token = localStorage.getItem('jwt');
+    api.setUserProfile(data, token)
+    .then((user)=>{
+      setCurrentUser(user.data)
       closeAllPopups();
       })
       .catch((err)=>{
@@ -162,9 +214,10 @@ function App() {
   }
 
   function handleUpdateAvatar(data){
-    api.newAvatar(data)
-    .then((res) =>{
-      setCurrentUser(res)
+    const token = localStorage.getItem('jwt');
+    api.newAvatar(data, token)
+    .then((user) =>{
+      setCurrentUser(user.data)
       closeAllPopups()
     })
     .catch((err)=>{
@@ -173,7 +226,8 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data){
-    api.addNewCard(data)
+    const token = localStorage.getItem('jwt');
+    api.addNewCard(data, token)
     .then((newCard) => {
       setCards(
         [newCard, ...cards]     
