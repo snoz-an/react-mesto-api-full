@@ -117,38 +117,11 @@ export class Api {
           return this._parseResult(res)
         })
     } 
-
-    /* likeCard(id, token) {
-      return fetch(`${this._url}/cards/${id}/likes`, {
-        method:"PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then(res => {
-          return this._parseResult(res)
-        })
-    }
-  
-      dislikeCard(id, token) {
-      return fetch(`${this._url}/cards/${id}/likes`, {
-        method: 'DELETE',
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then(res => {
-          return this._parseResult(res)
-        })
-    }*/
-  
   }
   
   
    const api = new Api({
-    baseUrl: 'http://www.api.snozz.students.nomoreparties.space',
+    baseUrl: 'https://www.api.snozz.students.nomoreparties.space',
   }
   )
   

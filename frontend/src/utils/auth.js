@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://www.api.snozz.students.nomoreparties.space';
+export const BASE_URL = 'https://www.api.snozz.students.nomoreparties.space';
 
 const checkResponse = (response) => response.ok ? response.json() : Promise.reject(response);
 
