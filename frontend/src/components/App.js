@@ -142,7 +142,6 @@ function App() {
    function handleCardLike(cardData) {
     const token = localStorage.getItem('jwt');
     const isLiked = cardData.likes.some(i => i === currentUser._id);
-    console.log(isLiked.likes)
     
     api.likeCard(cardData._id, !isLiked, token)
       .then((newCard) => {

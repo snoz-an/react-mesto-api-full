@@ -148,7 +148,7 @@ export class Api {
   
   
    const api = new Api({
-    baseUrl: 'http://snozz.students.nomoreparties.space',
+    baseUrl: 'http://www.api.snozz.students.nomoreparties.space',
   }
   )
   
