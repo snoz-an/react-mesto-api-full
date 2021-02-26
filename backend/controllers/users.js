@@ -7,18 +7,6 @@ const {
 
 const { JWT_SECRET, NODE_ENV } = process.env;
 
-/* const createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
-  User.create({ name, about, avatar })
-    // вернём записанные в базу данные
-    .then((user) => res.send({ data: user }))
-    // данные не записались, вернём ошибку
-    .catch(() => {
-      res.status(400).send({ message: 'переданы некорректные данные' });
-      res.status(500).send({ message: 'Произошла ошибка на сервере' });
-    });
-}; */
-
 const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
@@ -37,7 +25,7 @@ const createUser = (req, res, next) => {
             email,
             password: hash,
           }))
-          .then((user) => res.send(user)); //eslint-disable-line
+          .then(({name, about, avatar, email}) => res.send({name, about, avatar, email,})); //eslint-disable-line
       }
     })
     .catch(next);
@@ -84,7 +72,7 @@ const getUser = (req, res, next) => {
       }
       res.send(user);
     })
-    .catch(next); // добавили catch
+    .catch(next);
 };
 
 const getCurrentUser = (req, res, next) => {
@@ -95,7 +83,7 @@ const getCurrentUser = (req, res, next) => {
       }
       res.send(user);
     })
-    .catch(next); // добавили catch
+    .catch(next);
 };
 
 const updateUser = (req, res, next) => {

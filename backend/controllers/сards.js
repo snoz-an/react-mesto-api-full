@@ -1,4 +1,4 @@
-const { NotFound, BadRequest } = require('../errors');
+const { NotFound, Forbidden } = require('../errors');
 const Card = require('../models/card');
 
 const getCards = (req, res, next) => {
@@ -29,7 +29,7 @@ const deleteCard = (req, res, next) => {
         Card.findByIdAndRemove(req.params.id)
           .then(() => res.status(200).send(card));
       } else {
-        throw new BadRequest('Нельзя удалять чужую карточку');
+        throw new Forbidden('Нельзя удалять чужую карточку');
       }
     }).catch(next);
 };
